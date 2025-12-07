@@ -1,0 +1,26 @@
+### GET build info
+GET http://zhome.local:9294/api/buildInfo
+
+### GET triggers
+GET http://zhome.local:9294/api/triggers
+
+### GET temperature & humidity
+GET http://zhome.local:9294/api/temperatureHumidity
+
+### GET fan state
+GET http://zhome.local:9294/api/fanState
+
+### GET current fan state
+GET http://zhome.local:9294/api/fanState/current
+
+### GET check db integrity
+GET http://zhome.local:9294/api/db/checkIntegrity
+
+### GET components history
+GET http://zhome.local:9294/api/component/history
+
+### GET current components
+GET http://zhome.local:9294/api/component/current
+
+### GET check components
+GET http://zhome.local:9294/api/components/check

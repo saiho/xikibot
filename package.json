@@ -1,0 +1,43 @@
+{
+	"name": "xikibot",
+	"version": "4.2.0",
+	"description": "Extension of Zigbee2MQTT for home automation",
+	"engines": {
+		"node": "^20 || ^22 || ^24"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.2",
+		"@stylistic/eslint-plugin": "^5.7.1",
+		"@types/better-sqlite3": "^7.6.13",
+		"@types/node": "^24.10.9",
+		"@types/serve-static": "^2.2.0",
+		"@types/supertest": "^6.0.3",
+		"@types/tmp": "^0.2.6",
+		"@types/validator": "^13.15.10",
+		"esbuild": "^0.27.2",
+		"eslint": "^9.39.2",
+		"globals": "^17.1.0",
+		"supertest": "^7.2.2",
+		"tmp": "^0.2.5",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.53.1",
+		"validator": "^13.15.26",
+		"vite-tsconfig-paths": "^6.0.5",
+		"vitest": "^4.0.18"
+	},
+	"dependencies": {
+		"better-sqlite3": "^12.6.2",
+		"debounce": "^3.0.0",
+		"express-static-gzip": "^3.0.0",
+		"sunrise-sunset-js": "^2.2.1",
+		"valibot": "^1.2.0"
+	},
+	"scripts": {
+		"build": "eslint && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod",
+		"build-dev": "tsc && node esbuild.config.mjs",
+		"lint": "eslint",
+		"publish": "eslint && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod && node scripts/publish.mjs",
+		"publish-dev": "tsc && node esbuild.config.mjs && node scripts/publish.mjs",
+		"test": "vitest run --config ./vitest.config.mts"
+	}
+}

@@ -1,0 +1,22 @@
+[Unit]
+Description=zigbee2mqtt
+After=network.target
+
+[Service]
+Environment="NODE_ENV=production"
+Environment="ZIGBEE2MQTT_DATA=/home/zhome/zigbee2mqtt-rw/data"
+Environment="Z2M_WATCHDOG=default"
+Type=notify
+WorkingDirectory=/app/zigbee2mqtt
+ExecStart=/usr/local/bin/node index.js
+ExecStopPost=/app/scripts/config-backup.sh
+StandardOutput=inherit
+StandardError=inherit
+TimeoutSec=5min
+WatchdogSec=3min
+Restart=always
+RestartSec=3min
+User=zhome
+
+[Install]
+WantedBy=multi-user.target

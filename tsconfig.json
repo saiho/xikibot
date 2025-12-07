@@ -1,0 +1,16 @@
+// This file is used by Visual Studio Code and the tests, while "tsconfig.build.json" is used when doing the builds
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "./",
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "vitest.config.mts" ],
+  // references are not inherited from "extends"
+  "references": [
+    { "path": "../zigbee2mqtt" }
+  ]
+}
