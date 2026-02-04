@@ -83,20 +83,6 @@ function extractError(messageOrErrorOrLambda: string | Error | unknown | (() => 
   };
 }
 
-// TODO: Replace with built-in Promise.withResolvers when migrating to Node 22 and es2024
-export function promiseWithResolvers<T>(): {
-  promise: Promise<T>;
-  resolve: (value: T | PromiseLike<T>) => void;
-  reject: (reason?: unknown) => void;
-} {
-  let resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: unknown) => void;
-  const promise = new Promise<T>((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
-  return { promise: promise, resolve: resolve!, reject: reject! };
-}
-
 // ------- VALIDATION UTILS ------- //
 
 type Default<TWrapped extends BaseSchema<unknown, unknown, BaseIssue<unknown>>> = InferOutput<TWrapped> | Readonly<InferOutput<TWrapped>>;

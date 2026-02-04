@@ -13,7 +13,7 @@ export const LONGITUDE = 3.688805;
 export const API_PORT = 9294;
 
 export const DB_FILENAME = '/app/data/xikibot.sqlite';
-export const DB_VACUUM_WRITE_FREQUENCY = 100; // Compact DB every 100 writes
+export const DB_VACUUM_WRITE_FREQUENCY = 500; // Compact DB every 100 writes
 
 export const LOG_NAMESPACE = 'z2m:xikibot';
 

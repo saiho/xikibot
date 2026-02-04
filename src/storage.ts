@@ -2,7 +2,7 @@ import Database from 'better-sqlite3';
 import debounce from 'debounce';
 import { CLOSE_DB_DEBOUNCE_TIME, DB_FILENAME, DB_VACUUM_WRITE_FREQUENCY } from './global';
 import { FanStateParams, Pagination, TemperatureHumidityParams } from './api-definition';
-import { logDebug, logError, logInfo, promiseWithResolvers, runCommandAsync } from './util';
+import { logDebug, logError, logInfo, runCommandAsync } from './util';
 import { Component, ComponentPresence, SwitchComponent, SwitchExclusive2ChannelComponent, TemperatureHumiditySensorComponent } from './component.common';
 
 export interface TemperatureHumidityRecord {
@@ -257,7 +257,7 @@ async function openDbWriteAsync(): Promise<void> {
   let resolveOpeningOrClosing: (() => void) | undefined;
   try {
     if (fsReadonly) {
-      ({ promise: openingOrClosing, resolve: resolveOpeningOrClosing } = promiseWithResolvers<void>());
+      ({ promise: openingOrClosing, resolve: resolveOpeningOrClosing } = Promise.withResolvers<void>());
       await runCommandAsync('sudo mount -o remount,rw /app');
       fsReadonly = false;
     }
@@ -289,7 +289,7 @@ async function closeDbAuxAsync(): Promise<void> {
       logDebug('Database closed');
     }
     if (!fsReadonly) {
-      ({ promise: openingOrClosing, resolve: resolveOpeningOrClosing } = promiseWithResolvers<void>());
+      ({ promise: openingOrClosing, resolve: resolveOpeningOrClosing } = Promise.withResolvers<void>());
       await runCommandAsync('sudo mount -o remount,ro /app');
       fsReadonly = true;
     }

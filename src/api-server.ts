@@ -3,7 +3,7 @@ import { URL } from 'node:url';
 import { BaseIssue, BaseSchema, ErrorMessage, isValiError, ObjectEntries, parse, StrictObjectIssue, StrictObjectSchema } from 'valibot';
 import { API_PORT } from './global';
 import { API } from './api-definition';
-import { logDebug, logError, logWarning, promiseWithResolvers } from './util';
+import { logDebug, logError, logWarning } from './util';
 import { getTriggers } from './trigger';
 import {
   checkDbIntegrity,
@@ -37,7 +37,7 @@ export function stopAPIServer(): Promise<void> {
   if (!started) {
     return Promise.resolve();
   }
-  const { promise, resolve, reject } = promiseWithResolvers<void>();
+  const { promise, resolve, reject } = Promise.withResolvers<void>();
   server.close((err) => {
     started = false;
     if (err) {

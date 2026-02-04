@@ -8,7 +8,7 @@ Environment="ZIGBEE2MQTT_DATA=/home/zhome/zigbee2mqtt-rw/data"
 Environment="Z2M_WATCHDOG=default"
 Type=notify
 WorkingDirectory=/app/zigbee2mqtt
-ExecStart=/usr/local/bin/node index.js
+ExecStart=/usr/bin/node index.js
 ExecStopPost=/app/scripts/config-backup.sh
 StandardOutput=inherit
 StandardError=inherit
