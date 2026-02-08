@@ -37,6 +37,6 @@ if [ -n "$changes" ]; then
     if [ $online == 0 ] || systemctl is-active --quiet zigbee2mqtt; then
         sudo mount -o remount,rw /media/root-ro
         rsync $rsync_opts
-        sudo mount -o remount,ro /media/root-ro
+        sudo mount -o remount,ro /media/root-ro || true # do not cause a failure if the resource is busy
     fi
 fi

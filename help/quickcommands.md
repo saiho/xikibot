@@ -11,4 +11,5 @@
 - `sudo systemctl start zigbee2mqtt`
 - `sudo systemctl stop zigbee2mqtt`
 - `systemctl status zigbee2mqtt -n100`
+- `journalctl -u zigbee2mqtt` # all logs of the service
 - `sudo du -hs /media/root-rw/overlay/*`
