@@ -132,7 +132,7 @@ This part can be skipped if using the Wi-Fi.
 
 The Orange Pi Zero 2W has two USB ports, but only one (the one further from the edge of the board) is configured by default in host mode. To be able to use the two USB ports at the same time, i.e. to connect a USB ethernet adapter, do the following.
 
-Create a file called `sun50i-h616-usbhost0.dts`:
+Create a file called `usbhost0.dts`:
 
 ```
 /dts-v1/;
@@ -168,10 +168,12 @@ Create a file called `sun50i-h616-usbhost0.dts`:
 And then run as root:
 
 ```sh
-dtc -@ -I dts -O dtb -o sun50i-h616-usbhost0.dtbo sun50i-h616-usbhost0.dts
-cp sun50i-h616-usbhost0.dtbo /boot/dtb/allwinner/overlay
-rm sun50i-h616-usbhost0.dts sun50i-h616-usbhost0.dtbo
-armbian-config # Go to System / Kernel / Manage device tree overlays and activate "usbhost0"
+dtc -@ -I dts -O dtb -o usbhost0.dtbo usbhost0.dts
+mkdir /boot/overlay-user
+cp usbhost0.dtbo /boot/overlay-user
+rm usbhost0.dts usbhost0.dtbo
+mcedit /boot/armbianEnv.txt
+# add line: user_overlays=usbhost0
 ```
 
 ## Install Node.js
@@ -398,6 +400,8 @@ Some system service write logs repeatedly. Since the main partition is [overlaid
 Run in the Orange Pi `sudo crontab -e` (note, that must be executed as root) and add the line:
 
 ```
+31 03 * * * /usr/bin/rm -f /var/log/armbian-hardware-monitor.log
+39 03 * * * /usr/bin/dmesg -C
 55 03 * * * /usr/bin/apt clean
 ```
 
@@ -453,10 +457,12 @@ rm /var/log/apt/history.log*
 rm /var/log/apt/term.log*
 rm /var/log/apt/eipp.log.xz # ??
 rm /var/backups/*
+rm /var/log/armbian-hardware-monitor.log
 
 rm -rf /root/.npm # clean cached files
 rm -rf /root/.local/share/mc
 rm -rf /root/.cache/mc
+rm /root/.lesshst
 rm /root/.bash_history
 exit
 sudo su
@@ -489,6 +495,8 @@ reboot
 apt autoremove --purge
 sudo npm update -g
 ```
+
+If NodeJs is upgraded, remove corepack and upgrade also `npm`.
 
 Enable OverlayFS again, doing some [cleaning](#cleaning) before restarting.
 
