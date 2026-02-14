@@ -6,8 +6,7 @@ This extension has been designed for my own home automation and is not meant to 
 
 ## Preliminary notes
 
-- Create a clone of https://github.com/Koenkk/zigbee2mqtt at the same level of `xikibot` (not inside `xikibot` folder). This is a dependency for building.
-- `pnpm` should be installed.
+- When cloning the GIT repository, clone also the submodules.
 - I am running Zigbee2MQTT in a [Orange Pi Zero 2W](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-2W.html), so the extension has been designed considering a limited amount of memory.
 - Before building and deploying, read fully the readme and [how to setup the Orange Pi and install Zigbee2MQTT](help/setup.md). The documentation and scripts assume that the hostname and username of the Orange Pi are the following:
   - Username: `zhome`.

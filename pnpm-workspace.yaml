@@ -1,3 +1,9 @@
 onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@serialport/bindings-cpp'
   - better-sqlite3
   - esbuild
+  - unix-dgram
+packages:
+  - 'packages/*'
+sharedWorkspaceLockfile: true

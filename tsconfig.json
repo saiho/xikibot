@@ -11,6 +11,6 @@
     "vitest.config.mts" ],
   // references are not inherited from "extends"
   "references": [
-    { "path": "../zigbee2mqtt" }
+    { "path": "./packages/zigbee2mqtt" }
   ]
 }

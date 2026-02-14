@@ -1,4 +1,4 @@
-/// <reference types='../../zigbee2mqtt/lib/types/types.d.ts' />
+/// <reference types='../packages/zigbee2mqtt/lib/types/types.d.ts' />
 
 import type * as Settings from 'zigbee2mqtt/util/settings';
 import type Logger from 'zigbee2mqtt/util/logger';

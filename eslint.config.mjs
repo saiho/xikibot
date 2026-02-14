@@ -21,7 +21,7 @@ export default defineConfig([
     semi: true,
   }),
   {
-    ignores: ['dist/', 'scripts/', 'webpack.config.js'],
+    ignores: ['dist/', 'scripts/', 'packages/', 'webpack.config.js'],
   },
   {
     files: ['test/**/*.ts'],
