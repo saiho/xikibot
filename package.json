@@ -33,11 +33,11 @@
 		"valibot": "^1.2.0"
 	},
 	"scripts": {
-		"build": "eslint && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod",
-		"build-dev": "tsc && node esbuild.config.mjs",
+		"build": "eslint && packages/zigbee2mqtt/node_modules/typescript/bin/tsc -p packages/zigbee2mqtt/tsconfig.json && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod",
+		"build-dev": "packages/zigbee2mqtt/node_modules/typescript/bin/tsc -p packages/zigbee2mqtt/tsconfig.json && tsc && node esbuild.config.mjs",
 		"lint": "eslint",
-		"publish": "eslint && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod && node scripts/publish.mjs",
-		"publish-dev": "tsc && node esbuild.config.mjs && node scripts/publish.mjs",
+		"publish": "eslint && packages/zigbee2mqtt/node_modules/typescript/bin/tsc -p packages/zigbee2mqtt/tsconfig.json && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod && node scripts/publish.mjs",
+		"publish-dev": "packages/zigbee2mqtt/node_modules/typescript/bin/tsc -p packages/zigbee2mqtt/tsconfig.json && tsc && node esbuild.config.mjs && node scripts/publish.mjs",
 		"test": "vitest run --config ./vitest.config.mts"
 	}
 }
