@@ -6,31 +6,31 @@
 		"node": "^24"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.39.2",
-		"@stylistic/eslint-plugin": "^5.7.1",
+		"@eslint/js": "^10.0.1",
+		"@stylistic/eslint-plugin": "^5.10.0",
 		"@types/better-sqlite3": "^7.6.13",
-		"@types/node": "^24.10.10",
+		"@types/node": "^24.12.2",
 		"@types/serve-static": "^2.2.0",
-		"@types/supertest": "^6.0.3",
+		"@types/supertest": "^7.2.0",
 		"@types/tmp": "^0.2.6",
 		"@types/validator": "^13.15.10",
-		"esbuild": "^0.27.2",
-		"eslint": "^9.39.2",
-		"globals": "^17.3.0",
+		"esbuild": "^0.28.0",
+		"eslint": "^10.2.1",
+		"globals": "^17.5.0",
 		"supertest": "^7.2.2",
 		"tmp": "^0.2.5",
-		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.54.0",
-		"validator": "^13.15.26",
-		"vite-tsconfig-paths": "^6.0.5",
-		"vitest": "^4.0.18"
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.58.2",
+		"validator": "^13.15.35",
+		"vite-tsconfig-paths": "^6.1.1",
+		"vitest": "^4.1.4"
 	},
 	"dependencies": {
-		"better-sqlite3": "^12.6.2",
+		"better-sqlite3": "^12.9.0",
 		"debounce": "^3.0.0",
 		"express-static-gzip": "^3.0.0",
 		"sunrise-sunset-js": "^2.2.1",
-		"valibot": "^1.2.0"
+		"valibot": "^1.3.1"
 	},
 	"scripts": {
 		"build": "eslint && packages/zigbee2mqtt/node_modules/typescript/bin/tsc -p packages/zigbee2mqtt/tsconfig.json && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod",
