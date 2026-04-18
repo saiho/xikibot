@@ -4,8 +4,6 @@ import {
   ButtonState,
   Component,
   ShutterComponent,
-  SocketComponent,
-  SocketState,
   SwitchComponent,
   SwitchExclusive2ChannelComponent,
   SwitchState,
@@ -18,7 +16,6 @@ import {
   FAN_TOILET_DOWNSTAIRS_FULL_SPEED,
   FAN_TOILET_DOWNSTAIRS_LOW_SPEED,
   ON_CHANGE_NORMAL_DEBOUNCE_TIME,
-  ON_CHANGE_QUICK_DEBOUNCE_TIME,
   QUIET_SINCE,
   QUIET_UNTIL,
 } from './global';
@@ -56,10 +53,10 @@ export function initComponents(): Component[] {
     { name: 'Sensor temperatura habitación roja', location: 'Habitación 🔴', persistentId: 107 });
   const sensorTemperatureLivingRoom = new TemperatureHumiditySensorComponent(
     { name: 'Sensor temperatura salón', location: 'Salón', persistentId: 108 });
-  const socket2 = new SocketComponent(
-    { name: 'Enchufe 2' });
-  const socket4 = new SocketComponent(
-    { name: 'Enchufe 4' });
+  // const socket2 = new SocketComponent(
+  //   { name: 'Enchufe 2' });
+  // const socket4 = new SocketComponent(
+  //   { name: 'Enchufe 4' });
 
   lightToiletDownstairs.onChange = debounce((state: SwitchState) => {
     if (state.on && !isQuietTime()) {
@@ -83,6 +80,11 @@ export function initComponents(): Component[] {
     storeFanState(fanToiletDownstairs);
   }, ON_CHANGE_NORMAL_DEBOUNCE_TIME);
 
+  addScheduledTrigger(
+    'fanToiletDownstairs [daily]',
+    () => fanToiletDownstairs.switchOn(FAN_TOILET_DOWNSTAIRS_LOW_SPEED, { hours: 8 }),
+    { scheduled: 'atFixedTime', hour: 7, minute: 30 });
+
   lightBathroomUpstairs.onChange = debounce((state: SwitchState) => {
     if (state.on && !isQuietTime()) {
       fanBathroomUpstairs.switchOn();
@@ -105,28 +107,28 @@ export function initComponents(): Component[] {
     storeFanState(fanBathroomUpstairs);
   }, ON_CHANGE_NORMAL_DEBOUNCE_TIME);
 
-  socket2.onChange = debounce((state: SocketState) => {
-    if (state.on && !socket4.isSwitchedOn()) {
-      socket4.switchOn();
-    }
-    else if (state.off && !socket4.isSwitchedOff()) {
-      socket4.switchOff();
-    }
-  }, ON_CHANGE_QUICK_DEBOUNCE_TIME);
+  // socket2.onChange = debounce((state: SocketState) => {
+  //   if (state.on && !socket4.isSwitchedOn()) {
+  //     socket4.switchOn();
+  //   }
+  //   else if (state.off && !socket4.isSwitchedOff()) {
+  //     socket4.switchOff();
+  //   }
+  // }, ON_CHANGE_QUICK_DEBOUNCE_TIME);
 
-  socket4.onChange = debounce((state: SocketState) => {
-    if (state.on && !socket2.isSwitchedOn()) {
-      socket2.switchOn();
-    }
-    else if (state.off && !socket2.isSwitchedOff()) {
-      socket2.switchOff();
-    }
-  }, ON_CHANGE_QUICK_DEBOUNCE_TIME);
+  // socket4.onChange = debounce((state: SocketState) => {
+  //   if (state.on && !socket2.isSwitchedOn()) {
+  //     socket2.switchOn();
+  //   }
+  //   else if (state.off && !socket2.isSwitchedOff()) {
+  //     socket2.switchOff();
+  //   }
+  // }, ON_CHANGE_QUICK_DEBOUNCE_TIME);
 
-  addScheduledTrigger(
-    'socket2 [off]',
-    () => socket2.switchOff(),
-    { scheduled: 'atFixedTime', hour: 0, minute: 0 });
+  // addScheduledTrigger(
+  //   'socket2 [off]',
+  //   () => socket2.switchOff(),
+  //   { scheduled: 'atFixedTime', hour: 0, minute: 0 });
 
   addScheduledTrigger(
     'shutterBedroom [sunrise]',
