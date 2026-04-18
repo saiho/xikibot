@@ -121,7 +121,7 @@ apt install mc # optional
   - Apply: `systemctl restart systemd-journald`.
   - Do extra cleaning: `journalctl --rotate && journalctl --vacuum-time=1d`.
 - Disable root account:
-  - Edit `/etc/ssh/sshd_config` and set `PermitRootLogin no`.
+  - Create `/etc/ssh/sshd_config.d/zhome.conf` with content `PermitRootLogin no`.
   - Run `passwd -l root`.
 - Disable Armbian RAM log: `sed -i "s|ENABLED=true|ENABLED=false|g" /etc/default/armbian-ramlog`
 - Disable Armbian ZRAM: `sed -i "s|ENABLED=true|ENABLED=false|g" /etc/default/armbian-zram-config`
@@ -264,7 +264,7 @@ ZIGBEE2MQTT_DATA=/home/zhome/zigbee2mqtt-rw/data
 PNPM_HOME=/app/pnpm
 ```
 
-To be able to use `~/.ssh/environment`, edit `/etc/ssh/sshd_config` setting `PermitUserEnvironment yes`.
+To be able to use `~/.ssh/environment`, create or edit `/etc/ssh/sshd_config.d/zhome.conf` setting `PermitUserEnvironment yes`.
 
 Then reboot the Orange Pi, reconnect and check that the new variables are in the environment.
 
@@ -504,8 +504,8 @@ Enable OverlayFS again, doing some [cleaning](#cleaning) before restarting.
 
 Changes inside `/app` are permanent across reboots. So, we can upgrade Zigbee2MQTT without worrying about the [OverlayFS](#enable-overlayfs).
 
-In the main PC:
-- Run `zigbee2mqtt/update.sh`.
+In the main PC, in the root of the project:
+- Run `git submodule update --recursive --remote`.
 - Run `xikibot/scripts/upgrade-z2m.sh`.
 
 ## Upgrade the better-sqlite3
@@ -514,7 +514,11 @@ Run in the Orange Pi:
 
 ```sh
 cd /app
-rm -rf better-sqlite3 # it will fail removing the top directory but the content will be removed
+sudo mount -o remount,rw /app
+rm -rf sqlite3 # it will fail removing the top directory but the content will be removed
+cd sqlite3
+pnpm install better-sqlite3
+pnpm approve-builds
+cd ..
+sudo mount -o remount,ro /app
 ```
-
-Then follow the steps of [Install extra files and dependencies](#install-extra-files-and-dependencies) related only to `better-sqlite3`.
