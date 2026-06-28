@@ -9,28 +9,28 @@
 		"@eslint/js": "^10.0.1",
 		"@stylistic/eslint-plugin": "^5.10.0",
 		"@types/better-sqlite3": "^7.6.13",
-		"@types/node": "^24.12.2",
+		"@types/node": "^24.13.2",
 		"@types/serve-static": "^2.2.0",
 		"@types/supertest": "^7.2.0",
 		"@types/tmp": "^0.2.6",
 		"@types/validator": "^13.15.10",
-		"esbuild": "^0.28.0",
-		"eslint": "^10.2.1",
-		"globals": "^17.5.0",
+		"esbuild": "^0.28.1",
+		"eslint": "^10.6.0",
+		"globals": "^17.7.0",
 		"supertest": "^7.2.2",
-		"tmp": "^0.2.5",
+		"tmp": "^0.2.7",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.58.2",
+		"typescript-eslint": "^8.62.0",
 		"validator": "^13.15.35",
 		"vite-tsconfig-paths": "^6.1.1",
-		"vitest": "^4.1.4"
+		"vitest": "^4.1.9"
 	},
 	"dependencies": {
-		"better-sqlite3": "^12.9.0",
+		"better-sqlite3": "^12.11.1",
 		"debounce": "^3.0.0",
-		"express-static-gzip": "^3.0.0",
+		"express-static-gzip": "^3.0.1",
 		"sunrise-sunset-js": "^2.2.1",
-		"valibot": "^1.3.1"
+		"valibot": "^1.4.2"
 	},
 	"scripts": {
 		"build": "eslint && packages/zigbee2mqtt/node_modules/typescript/bin/tsc -p packages/zigbee2mqtt/tsconfig.json && tsc && vitest run --config ./vitest.config.mts && node esbuild.config.mjs --prod",
