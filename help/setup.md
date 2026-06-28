@@ -107,6 +107,7 @@ apt install mc # optional
 ## Extra configuration
 
 - Run `select-editor` and pick your favorite editor.
+  - Set `mc` skin: julia256 or julia256root
 - Using `armbian-config` configure:
   - Set Localization / hostname = `zhome.local`.
 - Turn off Bluetooth and the the Wi-Fi (when using ethernet) radios:
