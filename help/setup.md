@@ -45,7 +45,7 @@ This part can be skipped if using a USB ethernet adapter rather than the Wi-Fi.
 
 Before placing the SD card in the Orange Pi, mount it in the main PC and create the file `/root/.not_logged_in_yet`. Place the following content with the appropiate values:
 
-```ini
+```conf
 ## WiFi
 PRESET_NET_CHANGE_DEFAULTS="1"
 PRESET_NET_WIFI_ENABLED="1"
@@ -118,7 +118,12 @@ apt install mc # optional
   rfkill block 2
   ```
 - Reduce the size of the system logs to reduce the amount of data saved in disk.
-  - Edit `/etc/systemd/journald.conf`, setting `SystemMaxUse=10M` and `RuntimeMaxUse=10M`.
+  - Create `/etc/systemd/journald.conf.d/zhome.conf` (creating also the parent directory), with content
+```conf
+[Journal]
+SystemMaxUse=10M
+RuntimeMaxUse=10M
+```
   - Apply: `systemctl restart systemd-journald`.
   - Do extra cleaning: `journalctl --rotate && journalctl --vacuum-time=1d`.
 - Disable root account:
@@ -260,7 +265,7 @@ export PNPM_HOME=/app/pnpm
 
 Create `/home/zhome/.ssh/environment` with rights `chmod 600 /home/zhome/.ssh/environment` and add:
 
-```ini
+```conf
 ZIGBEE2MQTT_DATA=/home/zhome/zigbee2mqtt-rw/data
 PNPM_HOME=/app/pnpm
 ```
@@ -414,7 +419,7 @@ Do some [cleaning](#cleaning) before enabling the OverlayFS.
 
 Create the following file in `/etc/overlayroot.local.conf`:
 
-```ini
+```conf
 #overlayroot="disabled"
 overlayroot="tmpfs:recurse=0"
 ```
@@ -494,10 +499,9 @@ apt upgrade
 reboot
 
 apt autoremove --purge
+# If NodeJs was upgraded, remove corepack and upgrade also `npm`.
 sudo npm update -g
 ```
-
-If NodeJs is upgraded, remove corepack and upgrade also `npm`.
 
 Enable OverlayFS again, doing some [cleaning](#cleaning) before restarting.
 
